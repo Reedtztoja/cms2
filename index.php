@@ -19,11 +19,15 @@
 if(isset($_POST['submit']))
 {
     $fileName = $_FILES['uploadedFile']['name'];
+    $tempFileUrl = $_FILES["uploadedFile"]["tmp_name"];
     $targetDir = "img/";
     $imageInfo = getimagesize($_FILES["uploadedFile"]["tmp_name"]);
     if(!is_array($imageInfo)) {
         die("BŁĄD: Nieprawidłowy format obrazu");
     }
+
+    $imgString = file_get_contents($tempFileUrl);
+    $gdImage = imagecreatefromstring($imgString);
     $targetExtension = pathinfo($fileName, PATHINFO_EXTENSION);
     $targetExtension = strtolower($targetExtension);
     $targetFileName = $fileName . hrtime(true);
@@ -31,7 +35,9 @@ if(isset($_POST['submit']))
     $targetUrl = $targetDir . $targetFileName . "." . $targetExtension;
     if(file_exists($targetUrl))
         die("BŁĄD: Plik o tej nazwie juz istnieje");
-    move_uploaded_file($_FILES["uploadedFile"]["tmp_name"], $targetUrl);
+    //move_uploaded_file($_FILES["uploadedFile"]["tmp_name"], $targetUrl);
+    $targetUrl = $targetDir . $targetFileName . ".webp";
+    imagewebp($gdImage, $targetUrl);
 }
 ?>
 </body>
