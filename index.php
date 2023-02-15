@@ -18,7 +18,7 @@
 
 if(isset($_POST['submit']))
 {
-    $fileName = $_FILES['uploadedFile']['name'];
+    $filename = $_FILES['uploadedFile']['name'];
     $tempFileUrl = $_FILES["uploadedFile"]["tmp_name"];
     $targetDir = "img/";
     $imageInfo = getimagesize($_FILES["uploadedFile"]["tmp_name"]);
@@ -28,16 +28,29 @@ if(isset($_POST['submit']))
 
     $imgString = file_get_contents($tempFileUrl);
     $gdImage = imagecreatefromstring($imgString);
-    $targetExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+    
+    $targetExtension = pathinfo($filename, PATHINFO_EXTENSION);
     $targetExtension = strtolower($targetExtension);
-    $targetFileName = $fileName . hrtime(true);
-    $targetFileName = hash("sha256", $targetFileName);
-    $targetUrl = $targetDir . $targetFileName . "." . $targetExtension;
+    
+    $filename = $filename . hrtime(true);
+    $filename = hash("sha256", $filename);
+    
+    $targetUrl = $targetDir . $filename . "." . $targetExtension;
     if(file_exists($targetUrl))
         die("BŁĄD: Plik o tej nazwie juz istnieje");
     //move_uploaded_file($_FILES["uploadedFile"]["tmp_name"], $targetUrl);
-    $targetUrl = $targetDir . $targetFileName . ".webp";
+    $targetUrl = $targetDir . $filename . ".webp";
     imagewebp($gdImage, $targetUrl);
+
+    $db = new mysqli("localhost", "root", "", "cms");
+    $q = "INSERT post (ID, timestamp, filename) VALUES (NULL, ?, ?)";
+    $preparedQ = $db->prepare($q);
+    $date = date('Y-m-d H:i:s');
+    $preparedQ->bind_param('ss', $date, $filename);
+    $result = $preparedQ->execute();
+    if (!$result) {
+        die("Błąd bazy danych");
+    }
 }
 ?>
 </body>
