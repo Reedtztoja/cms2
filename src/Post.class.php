@@ -15,6 +15,14 @@ class Post {
     $imageString = file_get_contents($tempFileName);
     $gdImage = @imagecreatefromstring($imageString);
     imagewebp($gdImage, $targetFileName);
+
+    global $db;
+
+    $query = $db->prepare("INSERT INTO post VALUES(NLL, ?, ?)");
+    $dbTimestamp = date("Y-m-d H:i:s");
+    $query->bind_param("ss", $dbTimestamp, $targetFileName);
+    if(!$query->execute())
+        die("Błąd zapisu do bazy danych");
     }
 }
 
