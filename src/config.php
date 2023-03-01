@@ -1,4 +1,4 @@
 <?php
-$db = new mysqli('locahlost', 'root','','cms' );
+$db = new mysqli('localhost', 'root','','cms' );
 
 ?>
