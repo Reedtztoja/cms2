@@ -6,6 +6,7 @@ use Steampixel\Route;
 Route::add('/' , function() {
     global $twig;
     $twig->display("index.html.twig");
+    // phpinfo();
 });
 
 Route::add('/upload' , function(){

@@ -1,4 +1,5 @@
 {
+    "name": "1359031/cms",
     "require": {
         "steampixel/simple-php-router": "^0.7.1",
         "twig/twig": "^3.5"
