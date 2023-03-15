@@ -1,3 +1,13 @@
-{% include 'header.html.twig' %}
-<h1>Strona glowna</h1>
-{% include 'footer.html.twig' %}
+{% include 'header.html.twig'%}
+<h1>Posty</h1>
+<a href="upload">Wgraj mema</a>
+<br><br>
+{% for post in posts %}
+    <div class='title'>
+        <h2>{{ post.geTitle() }}</h2>
+        {{ post.getTimeStamp() }}<br>
+    </div>
+<img class='img' src="{{ post.getFilename() }}"><br></div>
+{% endfor %}
+
+{% include 'footer.html.twig'%}

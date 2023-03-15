@@ -11,6 +11,18 @@ class Post {
         $this->timeStamp = $timeStamp;
     }
 
+    public function getfilename() : string {
+        return $this->imageUrl;
+    }
+
+    public function geTitle() : string {
+        return $this->title;
+    }
+    
+    public function getTimeStamp() : string {
+        return $this->timeStamp;
+    }
+
     static function get(int $id) : Post {
         global $db;
         $query = $db->prepare("SELECT * FROM post WHERE id = ?");

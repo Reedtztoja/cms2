@@ -4,7 +4,11 @@
         <label for="uploadedFileInput">
             Wybierz plik do wgrania na serwer:
         </label><br>
+        <label for="title">
+            Podaj tytuł mema:
+        </label><br>
+        <input type="text" name="title" id="title" required><br>
         <input type="file" name="uploadedFile" id="uploadedFileInput" required><br>
         <input type="submit" value="Wyślij plik" name="submit"><br>
     </form>
-    {% include 'footer.html.twig' %}
+{% include 'footer.html.twig' %}

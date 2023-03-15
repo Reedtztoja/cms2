@@ -3,7 +3,7 @@
         'name' => '1359031/cms',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '6c7f761b10b9e43a29435f7d03d269fb65568d7f',
+        'reference' => '1e5838f98b8f95acddd86b3809ca31a1996fefa2',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '1359031/cms' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '6c7f761b10b9e43a29435f7d03d269fb65568d7f',
+            'reference' => '1e5838f98b8f95acddd86b3809ca31a1996fefa2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
